@@ -27,12 +27,12 @@ const Card = ({ a, navigation }) => {
             }}
             style={styles.cardContainer}
         >
-            <BlurView
+            {/* <BlurView
                 style={styles.blurContainer}
                 blurReductionFactor={4}
                 intensity={40} // Adjust the intensity of the blur (0 to 100)
                 tint="dark" // Use "light" or "dark" for the tint
-            />
+            /> */}
             <View style={styles.contentContainer}>
                 <Text style={styles.titleText}>Class - {a.Class_title}</Text>
                 <Text style={styles.normalText}>

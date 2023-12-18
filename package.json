@@ -30,7 +30,6 @@
         "mongoose": "^8.0.3",
         "react": "18.2.0",
         "react-native": "0.72.6",
-        "react-native-blur": "^3.2.2",
         "react-native-gesture-handler": "~2.12.0",
         "react-native-paper": "^5.11.4",
         "react-native-progress": "^5.0.1",

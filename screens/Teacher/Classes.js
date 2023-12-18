@@ -17,7 +17,6 @@ import Card from "./Card";
 import { Button, Modal, Portal, Provider, TextInput } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
 import commstyles from "../../assets/commstyles";
-import { BlurView } from "react-native-blur";
 import CommonCard from "./CommonCard";
 import Wrapper from "../../assets/Wrapper";
 const ClassesDetailed = ({ navigation }) => {
