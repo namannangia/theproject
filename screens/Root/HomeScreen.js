@@ -1,82 +1,232 @@
 import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import styles from "./commstyles";
-import { AuthService } from "../../AuthService";
-import { CommonActions } from "@react-navigation/native";
-var usrData = "";
-const checkLoginState = async (navigation) => {
-    try {
-        const userData = await AuthService.getUserName();
-        if (userData) {
-            console.log("yes", userData);
-            if (userData.EnrNum) {
-                navigation.dispatch(
-                    CommonActions.reset({
-                        index: 0,
-                        routes: [
-                            {
-                                name: "StudentStackScreens",
-                                params: { screen: "StudentPage1" },
-                            },
-                        ],
-                    })
-                );
-            } else {
-                navigation.dispatch(
-                    CommonActions.reset({
-                        index: 0,
-                        routes: [
-                            {
-                                name: "TeacherStackScreens",
-                                params: { screen: "TeacherPage1" },
-                            },
-                        ],
-                    })
-                );
-            }
-        } else {
-            console.log("No Login details found");
-        }
-    } catch (error) {
-        console.log("Error checking login state:", error);
-    }
-};
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    SafeAreaView,
+    Pressable,
+} from "react-native";
+import styles from "../../assets/commstyles";
+import { AuthService } from "../../Api/AuthService";
+import Svg, { Image } from "react-native-svg";
+import {
+    Button,
+    Provider as PaperProvider,
+    RadioButton,
+} from "react-native-paper";
+import { TextInput } from "react-native-paper";
+import { CommonActions, useNavigation } from "@react-navigation/native";
 
 const HomeScreen = ({ navigation }) => {
+    const navig = useNavigation();
+    const [email, setEmail] = React.useState("");
+    const [passwordVisible, setPasswordVisible] = React.useState(false);
+
+    const [isStudent, setStudent] = React.useState(true);
+    const [password, setPassword] = React.useState("");
+    const togglePasswordVisibility = () => {
+        setPasswordVisible(!passwordVisible);
+    };
     React.useEffect(() => {
-        checkLoginState(navigation);
+        const checkLogin = async () => {
+            const usrData = await AuthService.getUserName();
+            if (usrData)
+                if (usrData.EnrNum) {
+                    navigation.navigate("StudentStackScreens", {
+                        screen: "StudentPage1",
+                    });
+                } else {
+                    navigation.navigate("TeacherStackScreens", {
+                        screen: "TeacherPage1",
+                    });
+                }
+        };
+        checkLogin();
     }, []);
     return (
-        <View style={styles.container}>
-            <Text>Home Screen</Text>
-            <TouchableOpacity
-                style={styles.button}
-                onPress={() =>
-                    navigation.navigate("StudentStackScreens", {
-                        screen: "StudentLoginPage",
-                    })
-                }
+        <PaperProvider>
+            <SafeAreaView
+                style={{ display: "flex", flex: 1, alignItems: "center" }}
             >
-                <Text style={styles.buttonText}>I am a Student</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                style={styles.button}
-                onPress={() =>
-                    navigation.navigate("TeacherStackScreens", {
-                        screen: "TeacherLoginPage",
-                    })
-                }
-            >
-                <Text style={styles.buttonText}>I am a Teacher</Text>
-            </TouchableOpacity>
-            {usrData ? (
-                <TouchableOpacity>
-                    <Text>Log in as {usrData.Name}</Text>
-                </TouchableOpacity>
-            ) : (
-                <></>
-            )}
-        </View>
+                <View
+                    style={{
+                        borderWidth: 0,
+                        borderRadius: 200,
+                        padding: 10,
+                    }}
+                >
+                    <Svg height="150" width="150">
+                        <Image
+                            href={require("../../assets/SurajmalLogo.png")}
+                            width="100%"
+                            height="100%"
+                        />
+                    </Svg>
+                </View>
+                <Text
+                    style={{
+                        fontSize: 37,
+                        marginTop: 20,
+                        marginBottom: 60,
+                        fontFamily: "Montserrat-Light",
+                    }}
+                >
+                    College Login
+                </Text>
+
+                <View style={{ width: 300 }}>
+                    <View>
+                        <TextInput
+                            autoFocus={true}
+                            clearTextOnFocus={false}
+                            style={{
+                                maxHeight: 60,
+                                fontSize: 20,
+                            }}
+                            value={email}
+                            onChangeText={(text) => {
+                                setEmail(text);
+                            }}
+                            mode="outlined"
+                            label="Email"
+                            right={<TextInput.Affix text="@msijanakpuri.com" />}
+                        />
+                        <TextInput
+                            style={{
+                                maxHeight: 60,
+                                fontSize: 20,
+                                marginTop: 20,
+                            }}
+                            clearTextOnFocus={false}
+                            mode="outlined"
+                            value={password}
+                            onChangeText={(text) => setPassword(text)}
+                            label="Password"
+                            secureTextEntry={!passwordVisible}
+                            right={
+                                <TextInput.Icon
+                                    icon={passwordVisible ? "eye-off" : "eye"}
+                                    onPress={togglePasswordVisibility}
+                                />
+                            }
+                        />
+                    </View>
+                </View>
+                <View
+                    style={{
+                        marginTop: 30,
+                        display: "flex",
+                        flexDirection: "row",
+                    }}
+                >
+                    <View
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                        }}
+                    >
+                        <Text
+                            style={{
+                                fontSize: 20,
+                                textAlign: "center",
+                            }}
+                        >
+                            Teacher
+                        </Text>
+                        <RadioButton.Android
+                            value="first"
+                            status={isStudent ? "unchecked" : "checked"}
+                            onPress={() => setStudent(false)}
+                        />
+                    </View>
+                    <View
+                        style={{
+                            marginLeft: 40,
+                            display: "flex",
+                            flexDirection: "row",
+                        }}
+                    >
+                        <Text
+                            style={{
+                                fontSize: 20,
+                                textAlign: "center",
+                            }}
+                        >
+                            Student
+                        </Text>
+                        <RadioButton.Android
+                            value="second"
+                            status={isStudent ? "checked" : "unchecked"}
+                            onPress={() => setStudent(true)}
+                        />
+                    </View>
+                </View>
+                <Button
+                    style={{ margin: 30 }}
+                    mode="outlined"
+                    icon={"key"}
+                    onPress={() => {
+                        console.log(email + "@msijanakpuri.com", password);
+                        AuthService.login(
+                            email + "@msijanakpuri.com",
+                            password,
+                            isStudent
+                        )
+                            .then((obj) => {
+                                if (obj)
+                                    if (obj.EnrNum) {
+                                        console.log("Navigating to:STUDENT");
+                                        navig.reset({
+                                            index: 0,
+                                            routes: [
+                                                {
+                                                    name: "StudentStackScreens",
+                                                },
+                                            ],
+                                            screen: "StudentPage1",
+                                        });
+                                    } else {
+                                        console.log("Navigating to:TEACHER");
+                                        navig.reset({
+                                            index: 0,
+                                            routes: [
+                                                {
+                                                    name: "TeacherStackScreens",
+                                                },
+                                            ],
+                                            screen: "TeacherPage1",
+                                        });
+                                    }
+                                // navigation.navigate("StudentPage1");
+                                else alert("Invalid Credentials");
+                            })
+                            .catch((err) => {
+                                console.log("Error at stulogin:", err);
+                            });
+                    }}
+                >
+                    Login
+                </Button>
+                <Pressable
+                    onPress={() => {
+                        navigation.navigate("Register");
+                    }}
+                >
+                    <Text>
+                        New User?
+                        <Text
+                            style={{
+                                color: "#3D3DB6",
+                                fontFamily: "Montserrat-Light",
+                            }}
+                        >
+                            {" "}
+                            Register Now
+                        </Text>
+                    </Text>
+                </Pressable>
+            </SafeAreaView>
+        </PaperProvider>
     );
 };
 
