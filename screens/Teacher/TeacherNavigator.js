@@ -90,7 +90,7 @@ const MainTabs = ({ route }) => (
         tabBar={({ navigation, state, descriptors, insets }) => (
             <BottomNavigation.Bar
                 navigationState={state}
-                // safeAreaInsets={insets}
+                safeAreaInsets={insets}
                 onTabPress={({ route, preventDefault }) => {
                     const event = navigation.emit({
                         type: "tabPress",
@@ -108,9 +108,9 @@ const MainTabs = ({ route }) => (
                     }
                 }}
                 style={{
-                    backgroundColor: "rgb(48,48,142)",
+                    backgroundColor: "rgb(48,48,147)",
                 }}
-                activeColor="#aaa"
+                activeColor="#262672"
                 inactiveColor="#fff"
                 renderIcon={({ route, focused, color }) => {
                     const { options } = descriptors[route.key];
@@ -118,22 +118,11 @@ const MainTabs = ({ route }) => (
                         return options.tabBarIcon({
                             focused,
                             color,
-                            size: 24,
+                            size: 30,
                         });
                     }
 
                     return null;
-                }}
-                getLabelText={({ route }) => {
-                    const { options } = descriptors[route.key];
-                    const label =
-                        options.tabBarLabel !== undefined
-                            ? options.tabBarLabel
-                            : options.title !== undefined
-                            ? options.title
-                            : route.title;
-
-                    return label;
                 }}
             />
         )}

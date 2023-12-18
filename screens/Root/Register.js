@@ -124,7 +124,6 @@ const Register = ({ navigation }) => {
                             <View style={{ width: 300 }}>
                                 <View>
                                     <TextInput
-                                        clearTextOnFocus={true}
                                         style={{
                                             maxHeight: 60,
                                             fontSize: 20,
@@ -138,7 +137,6 @@ const Register = ({ navigation }) => {
                                         label="Name"
                                     />
                                     <TextInput
-                                        clearTextOnFocus={true}
                                         style={{
                                             maxHeight: 60,
                                             fontSize: 20,
@@ -159,7 +157,6 @@ const Register = ({ navigation }) => {
                                             fontSize: 20,
                                             marginVertical: 20,
                                         }}
-                                        clearTextOnFocus={true}
                                         mode="outlined"
                                         value={password}
                                         onChangeText={(text) =>

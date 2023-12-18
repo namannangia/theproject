@@ -96,7 +96,7 @@ const MainTabs = ({ route }) => (
                     }
                 }}
                 style={{
-                    backgroundColor: "rgb(48,48,142)",
+                    backgroundColor: "rgb(48,48,147)",
                 }}
                 activeColor="#aaa"
                 inactiveColor="#fff"

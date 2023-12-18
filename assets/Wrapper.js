@@ -4,6 +4,7 @@ import {
     View,
     StyleSheet,
     StatusBar,
+    FlatList,
     Dimensions,
     ImageBackground,
 } from "react-native";
@@ -25,10 +26,12 @@ const Wrapper = ({ children, refreshing, fetchData }) => {
             >
                 <StatusBar hidden />
                 <LinearGradient
-                    colors={["white", "#303090"]}
-                    locations={[0, 1]}
+                    colors={["white", "#303090", "rgb(48,48,146)"]}
+                    locations={[0, 0.5, 1]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 0, y: 2 }}
                     style={{
-                        height: Dimensions.get("screen").height,
+                        height: Dimensions.get("screen").height * 0.88,
                         width: Dimensions.get("screen").width,
                     }}
                 >
