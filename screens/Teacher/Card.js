@@ -6,7 +6,6 @@ import {
     Dimensions,
     StyleSheet,
 } from "react-native";
-import { BlurView } from "expo-blur";
 
 const Card = ({ a, navigation }) => {
     return (

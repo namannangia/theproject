@@ -9,15 +9,7 @@ export default styles = StyleSheet.create({
         border: "5px solid black",
         backgroundColor: "#F5F7F8",
     },
-    container2: {
-        flex: 1,
-        display: "flex",
-        // justifyContent: "center",
-        alignItems: "center",
-        fontSize: 25,
-        border: "5px solid black",
-        backgroundColor: "#7C81AD",
-    },
+
     button: {
         backgroundColor: "#3D3DB6",
         padding: 10,
@@ -35,9 +27,7 @@ export default styles = StyleSheet.create({
         fontFamily: "Montserrat-Light",
     },
     textIn: {
-        // borderWidth: 1,
         flex: 1,
-        // borderColor: "black",
         fontSize: 40,
         maxHeight: 50,
         backgroundColor: "#7C81AD",

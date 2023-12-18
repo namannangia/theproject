@@ -8,8 +8,6 @@ import {
 } from "react-native";
 import { Icon, ProgressBar, TextInput } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
-import { BlurView } from "expo-blur";
-import { TextInputIcon } from "react-native-paper";
 
 const Card = ({
     a,

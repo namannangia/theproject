@@ -5,6 +5,7 @@ import {
     TouchableOpacity,
     SafeAreaView,
     Pressable,
+    Dimensions,
 } from "react-native";
 import styles from "../../assets/commstyles";
 import { AuthService } from "../../Api/AuthService";
@@ -77,11 +78,12 @@ const HomeScreen = ({ navigation }) => {
                 <View style={{ width: 300 }}>
                     <View>
                         <TextInput
-                            autoFocus={true}
                             clearTextOnFocus={false}
                             style={{
                                 maxHeight: 60,
                                 fontSize: 20,
+                                width: Dimensions.get("window").width * 0.9,
+                                alignSelf: "center",
                             }}
                             value={email}
                             onChangeText={(text) => {
@@ -96,6 +98,8 @@ const HomeScreen = ({ navigation }) => {
                                 maxHeight: 60,
                                 fontSize: 20,
                                 marginTop: 20,
+                                width: Dimensions.get("window").width * 0.9,
+                                alignSelf: "center",
                             }}
                             clearTextOnFocus={false}
                             mode="outlined"
@@ -163,46 +167,43 @@ const HomeScreen = ({ navigation }) => {
                 </View>
                 <Button
                     style={{ margin: 30 }}
-                    mode="outlined"
+                    mode="elevated"
                     icon={"key"}
-                    onPress={() => {
-                        console.log(email + "@msijanakpuri.com", password);
-                        AuthService.login(
-                            email + "@msijanakpuri.com",
-                            password,
-                            isStudent
-                        )
-                            .then((obj) => {
-                                if (obj)
-                                    if (obj.EnrNum) {
-                                        console.log("Navigating to:STUDENT");
-                                        navig.reset({
-                                            index: 0,
-                                            routes: [
-                                                {
-                                                    name: "StudentStackScreens",
-                                                },
-                                            ],
-                                            screen: "StudentPage1",
-                                        });
-                                    } else {
-                                        console.log("Navigating to:TEACHER");
-                                        navig.reset({
-                                            index: 0,
-                                            routes: [
-                                                {
-                                                    name: "TeacherStackScreens",
-                                                },
-                                            ],
-                                            screen: "TeacherPage1",
-                                        });
-                                    }
-                                // navigation.navigate("StudentPage1");
-                                else alert("Invalid Credentials");
-                            })
-                            .catch((err) => {
-                                console.log("Error at stulogin:", err);
-                            });
+                    onPress={async () => {
+                        try {
+                            const obj = await AuthService.login(
+                                email + "@msijanakpuri.com",
+                                password,
+                                isStudent
+                            );
+                            if (obj)
+                                if (obj.EnrNum) {
+                                    console.log("Navigating to:STUDENT");
+                                    navig.reset({
+                                        index: 0,
+                                        routes: [
+                                            {
+                                                name: "StudentStackScreens",
+                                            },
+                                        ],
+                                        screen: "StudentPage1",
+                                    });
+                                } else {
+                                    console.log("Navigating to:TEACHER");
+                                    navig.reset({
+                                        index: 0,
+                                        routes: [
+                                            {
+                                                name: "TeacherStackScreens",
+                                            },
+                                        ],
+                                        screen: "TeacherPage1",
+                                    });
+                                }
+                            else alert("Invalid Credentials");
+                        } catch (error) {
+                            console.log("Error at stulogin:", error);
+                        }
                     }}
                 >
                     Login

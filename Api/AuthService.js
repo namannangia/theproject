@@ -11,7 +11,6 @@ export const AuthService = {
                 }
             );
 
-            // Check the condition based on your response structure
             if (response && response.status === 200) {
                 console.log("Login successful. Response:", response);
                 try {

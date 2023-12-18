@@ -41,7 +41,7 @@ const Reports = ({ navigation }) => {
         {
             key: 6,
             name: "1:30 - 2:30",
-            Class: "COmputer Graphics (Room - 110)",
+            Class: "Computer Graphics (Room - 110)",
         },
     ]);
     const dayMap = {

@@ -19,7 +19,7 @@ const Wrapper = ({ children, refreshing, fetchData }) => {
                     <RefreshControl
                         refreshing={refreshing}
                         onRefresh={fetchData}
-                        colors={["#009688"]} // Customize the color of the loading spinner
+                        colors={["#009688"]}
                     />
                 }
             >
@@ -35,8 +35,6 @@ const Wrapper = ({ children, refreshing, fetchData }) => {
                     <ImageBackground
                         style={{
                             alignSelf: "center",
-                            // left: Dimensions.get("window").width * 0.25,
-                            // top: Dimensions.get("window").height * 0.25,
                             borderWidth: 2,
                             transform: [{ scaleX: 2 }, { scaleY: 2 }],
                             minWidth: Dimensions.get("window").width,

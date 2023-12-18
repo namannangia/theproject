@@ -6,7 +6,6 @@ import {
     Dimensions,
     StyleSheet,
 } from "react-native";
-import { BlurView } from "expo-blur";
 import {
     Button,
     Divider,
@@ -23,13 +22,7 @@ const Card = ({ attendanceRec, b, navigation }) => {
     const attendanceperc =
         attendanceRec.attendance[b] / attendanceRec.lectures[b];
     return (
-        <TouchableOpacity style={styles.cardContainer}>
-            <BlurView
-                style={styles.blurContainer}
-                blurReductionFactor={4}
-                intensity={40} // Adjust the intensity of the blur (0 to 100)
-                tint="dark" // Use "light" or "dark" for the tint
-            />
+        <View style={styles.cardContainer}>
             <View style={styles.contentContainer}>
                 <Text
                     style={[
@@ -75,7 +68,7 @@ const Card = ({ attendanceRec, b, navigation }) => {
                     color={"#3D3DB6"}
                 />
             </View>
-        </TouchableOpacity>
+        </View>
     );
 };
 const styles = StyleSheet.create({
@@ -83,6 +76,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 10,
         margin: 10,
+        backgroundColor: "rgba(48,48,146,0.2)",
+        borderWidth: 2,
+        borderColor: "rgba(48,48,146,0.5)",
         width: Dimensions.get("window").width * 0.8,
         borderRadius: 20,
         overflow: "hidden", // Ensure that the borderRadius works as expected

@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import { Icon, ProgressBar, TextInput } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
-import { BlurView } from "expo-blur";
 import { TextInputIcon } from "react-native-paper";
 
 const CommonCard = ({
@@ -23,12 +22,6 @@ const CommonCard = ({
 }) => {
     return (
         <TouchableOpacity onPress={onclick} style={styles.cardContainer}>
-            <BlurView
-                style={styles.blurContainer}
-                blurReductionFactor={4}
-                intensity={50}
-                tint="dark"
-            />
             <View style={styles.contentContainer}>
                 {heading ? (
                     <Text style={styles.titleText}>
@@ -98,8 +91,11 @@ const styles = StyleSheet.create({
         margin: 10,
         width: Dimensions.get("window").width * 0.8,
         borderRadius: 20,
-        overflow: "hidden", // Ensure that the borderRadius works as expected
-        position: "relative", // Added to establish a stacking context
+        overflow: "hidden",
+        position: "relative",
+        backgroundColor: "rgba(48,48,146,0.2)",
+        borderWidth: 2,
+        borderColor: "rgba(48,48,146,0.5)",
     },
     contentContainer: {
         zIndex: 2,

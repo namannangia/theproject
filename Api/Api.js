@@ -1,7 +1,8 @@
 import axios from "axios";
-const backendURL = "https://3fdj0rzk-3000.inc1.devtunnels.ms";
+const backendURL = "https://attendance-manager-namannangia.vercel.app";
 export const Api = {
     get: async (url) => {
+        console.log("Sending Get @:", url);
         try {
             const res = await axios.get(backendURL + url);
             if (res) {
@@ -14,13 +15,14 @@ export const Api = {
     },
 
     post: async (url, data) => {
+        console.log("Sending Post @:", url);
         try {
             const response = await axios.post(backendURL + url, data);
             console.log("POST", url, JSON.stringify(response.data));
             return response.data;
         } catch (error) {
             console.error("ERROR POST", url, error);
-            throw error; // You might choose to handle or rethrow the error based on your needs
+            throw error;
         }
     },
 };
